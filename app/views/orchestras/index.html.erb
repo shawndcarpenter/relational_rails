@@ -1,0 +1,6 @@
+<h1>All Orchestras</h1>
+
+<% @orchestras.each do |orchestra| %>
+  <h3><a href="/orchestras/<%= orchestra.id %>"><%= orchestra.name %></a></h3>
+  <p><%= orchestra.city %></p>
+<% end %>
