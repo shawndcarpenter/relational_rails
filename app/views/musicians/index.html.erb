@@ -2,6 +2,7 @@
 
 <% @musicians.each do |musician| %>
   <h3><a href="/musicians/<%= musician.id %>"><%= musician.name %></a></h3>
-  <p><%= musician.instrument %></p>
-  <p><%= musician.position %></p>
+  <p>Instrument: <%= musician.instrument %></p>
+  <p>Chair: <%= musician.position %></p>
+  <p>Years With Orchestra: <%= musician.years_active %></p>
 <% end %>
