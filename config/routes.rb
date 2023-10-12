@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get '/orchestras/:id', to: 'orchestras#show'
   get '/musicians', to: 'musicians#index'
   get '/musicians/:id', to: 'musicians#show'
+  get '/orchestras/:id/musicians', to: 'orchestra_musicians#index'
 end
