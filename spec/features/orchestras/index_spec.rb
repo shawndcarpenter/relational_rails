@@ -16,4 +16,9 @@ RSpec.describe 'the orchestras index page' do
    # expect(page).to_not have_content(los_angeles.name)
   end
 
+  # user story 6, parent index sorted by most recently created
+  it 'displays all of the names of the orchestras in order by most recently created' do
+    visit "/orchestras"
+  end
+
 end
