@@ -11,8 +11,8 @@ RSpec.describe 'the orchestras index page' do
   it 'displays all of the names of the orchestras' do
     visit "/orchestras"
 
-    expect(page).to have_content(colorado.name)
-    expect(page).to have_content(portland.name)
+    expect(page).to have_content(@colorado.name)
+    expect(page).to have_content(@portland.name)
    # expect(page).to_not have_content(los_angeles.name)
   end
 
