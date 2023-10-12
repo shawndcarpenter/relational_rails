@@ -17,4 +17,4 @@
 @annamaria = @colorado.musicians.create!(name: 'Annamaria Vasmatzidis', on_leave: false, instrument: 'violin', position: 2, years_active: 1)
 @basil = @colorado.musicians.create!(name: 'Basil Vendryes', on_leave: false, instrument: 'viola', position: 4, years_active: 2)
 @august = @colorado.musicians.create!(name: 'August Ramos', on_leave: false, instrument: 'bass', position: 1, years_active: 7)
-@roger = @colorado.musicians.create!(name: 'Roger Soren' on_leave: false, instrument: 'contrabassoon', position: 1, years_active: 36)
+@roger = @colorado.musicians.create!(name: 'Roger Soren', on_leave: false, instrument: 'contrabassoon', position: 1, years_active: 36)
