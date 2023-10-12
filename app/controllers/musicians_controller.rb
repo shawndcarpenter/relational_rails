@@ -1,4 +1,4 @@
-class MusicianController < ApplicationController
+class MusiciansController < ApplicationController
   def index
     @musicians = Musician.all
   end
