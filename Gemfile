@@ -55,6 +55,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy' #save_and_open_page
+  gem 'orderly'
   gem 'simplecov'
   gem 'shoulda-matchers', '~> 5.0'
 end
