@@ -1,3 +1,6 @@
+<h4><a href="/orchestras/"><%= "All Orchestras" %></a></h4>
+<h4><a href="/musicians/"><%= "All Musicians" %></a></h4>
+
 <% @musicians.each do |musician| %>
   <h3><a href="/musicians/<%= musician.id %>"><%= musician.name %></a></h3>
   <p>Instrument: <%= musician.instrument %></p>
