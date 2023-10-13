@@ -34,7 +34,7 @@ RSpec.describe 'Orchestras musicians index' do
 
   # User Story 8, Child Index Link
   it 'has a child index link' do
-    visit "/orchestras/#{@colorado.id}"
+    visit "/orchestras/#{@colorado.id}/musicians"
 
     expect(page).to have_link("All Musicians")
 
@@ -45,7 +45,7 @@ RSpec.describe 'Orchestras musicians index' do
 
   # User Story 9, Parent Index Link
   it 'has a parent index link' do
-    visit "/orchestras/#{@colorado.id}"
+    visit "/orchestras/#{@colorado.id}/musicians"
 
     expect(page).to have_link("All Orchestras")
 
