@@ -19,6 +19,7 @@ RSpec.describe 'the orchestras index page' do
   # user story 6, parent index sorted by most recently created
   it 'displays all of the names of the orchestras in order by most recently created' do
     visit "/orchestras"
-  end
 
+    expect(@portland.name).to appear_before(@colorado.name)
+  end
 end
