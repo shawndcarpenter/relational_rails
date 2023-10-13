@@ -52,4 +52,15 @@ RSpec.describe 'the orchestras show page' do
 
     expect(current_path).to eq('/orchestras/')
   end
+
+  # User Story 10, Parent Child Index Link
+  it 'links to the parents childrens page' do
+    visit "/orchestras/#{@colorado.id}"
+
+    expect(page).to have_link("Our Musicians")
+
+    click_link "Our Musicians"
+
+    expect(current_path).to eq("/orchestras/#{@colorado.id}/musicians")
+  end
 end
