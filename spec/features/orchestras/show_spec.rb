@@ -9,6 +9,7 @@ RSpec.describe 'the orchestras show page' do
     @paul = @colorado.musicians.create!(name: 'Paul Primus', on_leave: false, instrument: 'violin', position: 2, years_active: 17)
     @delcho = @colorado.musicians.create!(name: 'Delcho Tenev', on_leave: false, instrument: 'violin', position: 3, years_active: 8)
   end
+
   # User Story 2, Parent Show
   it 'displays the name of the orchestra' do
     visit "/orchestras/#{@colorado.id}"
@@ -28,5 +29,27 @@ RSpec.describe 'the orchestras show page' do
     visit "/orchestras/#{@colorado.id}"
 
     expect(page).to have_content("Musicians: 4")
+  end
+
+  # User Story 8, Child Index Link
+  it 'has a child index link' do
+    visit "/orchestras/#{@colorado.id}"
+
+    expect(page).to have_link("All Musicians")
+
+    click_link "All Musicians"
+
+    expect(current_path).to eq('/musicians/')
+  end
+
+  # User Story 9, Parent Index Link
+  it 'has a parent index link' do
+    visit "/orchestras/#{@colorado.id}"
+
+    expect(page).to have_link("All Orchestras")
+
+    click_link "All Orchestras"
+
+    expect(current_path).to eq('/orchestras/')
   end
 end
