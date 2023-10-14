@@ -1,0 +1,10 @@
+<form action="/orchestras" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>Enter orchestra name:</p>
+  <input type='text' name='name'/><br/>
+  <p>Enter orchestra city:</p>
+  <input type='text' name='city'/><br/>
+  <p>Enter number of conductors for this orchestra:</p>
+  <input type='text' name='total_conductors'/><br/>
+  <input type='submit'/>
+</form>
