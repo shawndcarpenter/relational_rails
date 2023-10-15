@@ -53,4 +53,41 @@ RSpec.describe 'Orchestras musicians index' do
 
     expect(current_path).to eq('/orchestras/')
   end
+
+  # User Story 13, Parent Child Creation
+  xit 'allows for child adoption' do
+    visit "/orchestras/#{@colorado.id}/musicians"
+
+    expect(page).to have_link("Create Musician")
+
+    click_link "Create Musician"
+
+    expect(current_path).to eq("/orchestras/#{@colorado.id}/musicians/new")
+
+    fill_in "name", with: "Shawn Dylan"
+    fill_in "instrument", with: "violin"
+    fill_in "position", with: "3"
+    fill_in "years_active", with: "15"
+
+    expect(page).to have_button
+
+    click_button
+
+    expect(current_path).to eq("/orchestras/#{@colorado.id}/musicians")
+    expect(page).to have_link("Shawn Dylan")
+  end
+
+  # User Story 16, Sort Parent's Children in Alphabetical Order by name
+  it 'can sort children in alpha order' do
+    visit "/orchestras/#{@colorado.id}/musicians"
+
+    expect("Kunjing").to appear_before("Dmitri")
+
+    expect(page).to have_link("Sort A-Z")
+
+    click_link("Sort A-Z")
+
+    expect(current_path).to eq("/orchestras/#{@colorado.id}/musicians")
+    expect("Dmitri").to appear_before("Kunjing")
+  end
 end
