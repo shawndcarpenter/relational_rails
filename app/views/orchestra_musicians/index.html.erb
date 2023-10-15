@@ -7,3 +7,7 @@
   <p>Chair: <%= musician.position %></p>
   <p>Years With Orchestra: <%= musician.years_active %></p>
 <% end %>
+
+<p><%= link_to "Create Musician", "/orchestras/#{@orchestra.id}/musicians/new" %></p>
+
+<p><%= link_to "Sort A-Z", :sort => "name" %></p>
