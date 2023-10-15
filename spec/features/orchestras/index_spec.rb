@@ -72,4 +72,15 @@ RSpec.describe 'the orchestras index page' do
     expect(page).to have_content("Conductors: 3")
     expect(page).to have_content("Musicians: 0")
   end
+
+  # User Story 17, Parent Update From Parent Index Page 
+  it 'can update parent info from index page' do
+    visit "/orchestras"
+
+    expect(page).to have_link("Update Colorado Symphony")
+
+    click_link("Update Colorado Symphony")
+
+    expect(current_path).to eq("/orchestras/#{@colorado.id}/edit")
+  end
 end
