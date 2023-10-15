@@ -55,7 +55,7 @@ RSpec.describe 'Orchestras musicians index' do
   end
 
   # User Story 13, Parent Child Creation
-  xit 'allows for child adoption' do
+  it 'allows for child adoption' do
     visit "/orchestras/#{@colorado.id}/musicians"
 
     expect(page).to have_link("Create Musician")
