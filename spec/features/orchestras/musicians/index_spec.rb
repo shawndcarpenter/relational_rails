@@ -90,4 +90,8 @@ RSpec.describe 'Orchestras musicians index' do
     expect(current_path).to eq("/orchestras/#{@colorado.id}/musicians")
     expect("Dmitri").to appear_before("Kunjing")
   end
+
+  it 'can update child info from parent child page' do
+    visit "/orchestras/#{@colorado.id}/musicians"
+  end
 end

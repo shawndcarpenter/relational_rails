@@ -61,4 +61,15 @@ RSpec.describe 'Orchestras musicians index' do
     expect(page).to_not have_content('Paul Primus')
     expect(page).to_not have_content('Dmitri Pogorelov')
   end
+
+  # User Story 18, Child Update From Childs Index Page
+  it 'can update child info from child index page' do
+    visit "/musicians"
+
+    expect(page).to have_link("Update Kunjing Dai")
+
+    click_link("Update Kunjing Dai")
+
+    expect(current_path).to eq("/musicians/#{@kunjing.id}/edit")
+  end
 end
