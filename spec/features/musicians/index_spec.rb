@@ -52,4 +52,13 @@ RSpec.describe 'Orchestras musicians index' do
 
     expect(current_path).to eq('/orchestras/')
   end
+
+  # User Story 15, Child Index only shows `true` Records
+  it 'only shows true records in child index' do
+    visit "/musicians"
+
+    expect(page).to have_content('Kunjing Dai')
+    expect(page).to_not have_content('Paul Primus')
+    expect(page).to_not have_content('Dmitri Pogorelov')
+  end
 end
