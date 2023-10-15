@@ -93,5 +93,11 @@ RSpec.describe 'Orchestras musicians index' do
 
   it 'can update child info from parent child page' do
     visit "/orchestras/#{@colorado.id}/musicians"
+
+    expect(page).to have_link("Update Kunjing Dai")
+
+    click_link("Update Kunjing Dai")
+
+    expect(current_path).to eq("/musicians/#{@kunjing.id}/edit")
   end
 end
