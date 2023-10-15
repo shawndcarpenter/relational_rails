@@ -63,4 +63,28 @@ RSpec.describe 'the orchestras show page' do
 
     expect(current_path).to eq("/orchestras/#{@colorado.id}/musicians")
   end
+
+  # User Story 12, Parent Update
+  it 'updates parent' do
+    visit "/orchestras/#{@colorado.id}"
+
+    expect(page).to have_link("Update Orchestra")
+
+    click_link "Update Orchestra"
+
+    expect(current_path).to eq("/orchestras/#{@colorado.id}/edit")
+
+    fill_in "name", with: "Colorado Philharmonic"
+    fill_in "city", with: "Centennial"
+    fill_in "total_conductors", with: "2"
+
+    expect(page).to have_button
+
+    click_button
+
+    expect(current_path).to eq("/orchestras/#{@colorado.id}")
+    expect(page).to have_content("Colorado Philharmonic")
+    expect(page).to have_content("City: Centennial")
+    expect(page).to have_content("Conductors: 2")
+  end
 end

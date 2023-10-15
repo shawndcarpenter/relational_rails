@@ -1,0 +1,12 @@
+<%= form_with url: "/orchestras/#{@orchestra.id}/musicians", method: :post, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :instument %>
+  <%= form.text_field :instrument %>
+  <%= form.label :position %>
+  <%= form.text_field :position %>
+  <%= form.label :years_active %>
+  <%= form.text_field :years_active %>
+
+  <%= form.submit "Create Musician" %>
+<% end %>

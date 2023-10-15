@@ -45,4 +45,24 @@ RSpec.describe 'the musicians show page' do
 
     expect(current_path).to eq('/orchestras/')
   end
+
+  # User Story 14, Child Update 
+  it 'can update child' do
+    visit "/musicians/#{@kunjing.id}"
+    
+    expect(page).to have_link("Update Musician")
+
+    click_link "Update Musician"
+
+    expect(current_path).to eq("/musicians/#{@kunjing.id}/edit")
+    expect(page).to have_button
+
+    fill_in "instrument", with: "bassoon"
+    click_button
+
+    expect(current_path).to eq("/musicians/#{@kunjing.id}")
+    expect(page).to have_content("bassoon")
+    expect(page).to_not have_content("viola")
+
+  end
 end

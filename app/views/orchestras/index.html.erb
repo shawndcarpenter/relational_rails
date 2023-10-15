@@ -5,5 +5,8 @@
 
 <% @orchestras.each do |orchestra| %>
   <h3><a href="/orchestras/<%= orchestra.id %>"><%= orchestra.name %></a></h3>
+  <p><a href="/orchestras/<%= orchestra.id %>/edit"><%= "Update #{orchestra.name}" %></a></p>
   <p><%= orchestra.city %></p>
 <% end %>
+
+<h4><a href="/orchestras/new/"><%= "New Orchestra" %></a></h4>

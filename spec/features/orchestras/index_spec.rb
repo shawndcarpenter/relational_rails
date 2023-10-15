@@ -44,4 +44,43 @@ RSpec.describe 'the orchestras index page' do
 
     expect(current_path).to eq('/orchestras/')
   end
+
+  # User Story 11, Parent Creation
+  it 'allows creation of new parent' do
+    visit "/orchestras"
+
+    expect(page).to have_link("New Orchestra")
+
+    click_link "New Orchestra"
+
+    expect(current_path).to eq('/orchestras/new/')
+
+    fill_in "name", with: "Chicago Symphony Orchestra"
+    fill_in "city", with: "Chicago"
+    fill_in "total_conductors", with: "3"
+
+    expect(page).to have_button
+
+    click_button
+
+    expect(current_path).to eq('/orchestras')
+    expect(page).to have_link("Chicago Symphony Orchestra")
+
+    click_link "Chicago Symphony Orchestra"
+
+    expect(page).to have_content("City: Chicago")
+    expect(page).to have_content("Conductors: 3")
+    expect(page).to have_content("Musicians: 0")
+  end
+
+  # User Story 17, Parent Update From Parent Index Page 
+  it 'can update parent info from index page' do
+    visit "/orchestras"
+
+    expect(page).to have_link("Update Colorado Symphony")
+
+    click_link("Update Colorado Symphony")
+
+    expect(current_path).to eq("/orchestras/#{@colorado.id}/edit")
+  end
 end
