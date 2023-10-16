@@ -12,12 +12,12 @@ class OrchestraMusiciansController < ApplicationController
   def create
     @orchestra = Orchestra.find(params[:id])
     @musicians = @orchestra.musicians
-    @musician = @orchestra.musicians.create({
-      name: params[:name],
-      instrument: params[:instrument], 
-      position: params[:position], 
-      years_active: params[:years_active]
-    })
+    @musician = @orchestra.musicians.create(musician_params)
     redirect_to "/orchestras/#{@orchestra.id}/musicians"
+  end
+
+  private
+  def musician_params
+    params.permit(:name, :instrument, :position, :years_active, :on_leave)
   end
 end

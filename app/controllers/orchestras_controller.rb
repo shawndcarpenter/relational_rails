@@ -11,14 +11,7 @@ class OrchestrasController < ApplicationController
   end
 
   def create
-    orchestra = Orchestra.new({
-      name: params[:name],
-      city: params[:city],
-      total_conductors: params[:total_conductors], 
-      active: params[:active]
-    })
-
-    orchestra.save
+    orchestra = Orchestra.create(orchestra_params)
 
     redirect_to '/orchestras'
   end
@@ -29,12 +22,7 @@ class OrchestrasController < ApplicationController
 
   def update
     orchestra = Orchestra.find(params[:id])
-    orchestra.update({
-      name: params[:name],
-      city: params[:city],
-      total_conductors: params[:total_conductors],
-      active: params[:active]
-      })
+    orchestra.update(orchestra_params)
     orchestra.save
     redirect_to "/orchestras/#{orchestra.id}"
   end
@@ -43,5 +31,10 @@ class OrchestrasController < ApplicationController
     orchestra = Orchestra.find(params[:id])
     orchestra.destroy
     redirect_to "/orchestras"
+  end
+
+  private
+  def orchestra_params
+    params.permit(:name, :city, :total_conductors, :active)
   end
 end
