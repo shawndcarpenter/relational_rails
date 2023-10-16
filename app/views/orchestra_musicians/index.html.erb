@@ -11,8 +11,8 @@
 
 <p><%= link_to "Sort A-Z", :sort => "name" %></p>
 
-<%= form_with do |form| %>
-  <%= form.label :years_active %>
+<%= form_with url: "/orchestras/#{@orchestra.id}/musicians?sort=years_active", method: :get do |form| %>
+  <%= form.label :years_active, "Only return musicians with more than this many years of experience:" %>
   <%= form.text_field :years_active %>
+  <%= form.submit "filter " %>
 <% end %>
-<p><%= button_to "Only return musicians with more than this many years of experience" %>

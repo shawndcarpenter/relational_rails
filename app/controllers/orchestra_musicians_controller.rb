@@ -1,7 +1,11 @@
 class OrchestraMusiciansController < ApplicationController
   def index
     @orchestra = Orchestra.find(params[:id])
-    @musicians = @orchestra.musicians.order(params[:sort])
+    if params[:years_active] != nil
+      @musicians = @orchestra.musicians.more_than(params[:years_active])
+    else
+      @musicians = @orchestra.musicians.order(params[:sort])
+    end
   end
 
   def new
