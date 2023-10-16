@@ -1,13 +1,14 @@
 <h4><a href="/orchestras/"><%= "All Orchestras" %></a></h4>
 <h4><a href="/musicians/"><%= "All Musicians" %></a></h4>
 
-<form action="/orchestras" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <p>Enter orchestra name:</p>
-  <input type='text' name='name'/><br/>
-  <p>Enter orchestra city:</p>
-  <input type='text' name='city'/><br/>
-  <p>Enter number of conductors for this orchestra:</p>
-  <input type='text' name='total_conductors'/><br/>
-  <input type='submit'/>
-</form>
+<%= form_with url: "/orchestras", method: :post, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+    <%= form.label :city %>
+  <%= form.text_field :city %>
+    <%= form.label :total_conductors %>
+  <%= form.text_field :total_conductors %>
+  <%= form.label :active %>
+  <%= form.check_box :active %>
+  <%= form.submit "Create Orchestra" %>
+<% end %>

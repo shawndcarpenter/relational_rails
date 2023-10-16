@@ -14,7 +14,8 @@ class OrchestrasController < ApplicationController
     orchestra = Orchestra.new({
       name: params[:name],
       city: params[:city],
-      total_conductors: params[:total_conductors],     
+      total_conductors: params[:total_conductors], 
+      active: params[:active]
     })
 
     orchestra.save
@@ -31,7 +32,8 @@ class OrchestrasController < ApplicationController
     orchestra.update({
       name: params[:name],
       city: params[:city],
-      total_conductors: params[:total_conductors]
+      total_conductors: params[:total_conductors],
+      active: params[:active]
       })
     orchestra.save
     redirect_to "/orchestras/#{orchestra.id}"

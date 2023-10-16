@@ -1,15 +1,14 @@
 <h4><a href="/orchestras/"><%= "All Orchestras" %></a></h4>
 <h4><a href="/musicians/"><%= "All Musicians" %></a></h4>
 
-<form action="/orchestras/<%= @orchestra.id %>" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="_method" value="PATCH" />
-  <h2>Edit</h2>
-  <p>Name:</p>
-  <input type='text' name='name' value="<%= @orchestra.name%>"/><br/>
-  <p>City:</p>
-  <input type='text' name='city' value="<%= @orchestra.city%>"/><br/>
-  <p>Number of Conductors:</p>
-  <input type='text' name='total_conductors' value="<%= @orchestra.total_conductors%>"/><br/>
-  <input type='submit'/>
-</form>
+<%= form_with url: "/orchestras/#{@orchestra.id}", method: :patch, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+    <%= form.label :city %>
+  <%= form.text_field :city %>
+    <%= form.label :total_conductors %>
+  <%= form.text_field :total_conductors %>
+  <%= form.label :active %>
+  <%= form.check_box :active %>
+  <%= form.submit "Create Orchestra" %>
+<% end %>
