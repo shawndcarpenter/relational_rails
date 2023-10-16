@@ -1,6 +1,3 @@
-<h4><a href="/orchestras/"><%= "All Orchestras" %></a></h4>
-<h4><a href="/musicians/"><%= "All Musicians" %></a></h4>
-
 <%= form_with url: "/orchestras", method: :post, local: true do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
