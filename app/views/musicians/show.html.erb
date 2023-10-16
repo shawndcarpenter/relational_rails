@@ -7,3 +7,4 @@
 <p>Years With Orchestra: <%= @musician.years_active %></p>
 
 <h4><a href="/musicians/<%= @musician.id %>/edit">Update Musician</a></h4>
+<h4><%= link_to "Delete Musician", "/musicians/#{@musician.id}", method: :delete %></h4>
