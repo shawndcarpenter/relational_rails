@@ -1,14 +1,18 @@
-<h4><a href="/orchestras/"><%= "All Orchestras" %></a></h4>
-<h4><a href="/musicians/"><%= "All Musicians" %></a></h4>
-
 <% @musicians.each do |musician| %>
   <h3><a href="/musicians/<%= musician.id %>"><%= musician.name %></a></h3>
   <p>Instrument: <%= musician.instrument %></p>
   <p>Chair: <%= musician.position %></p>
   <p>Years With Orchestra: <%= musician.years_active %></p>
   <p><a href="/musicians/<%= musician.id %>/edit"><%= "Update #{musician.name}" %></a></p>
+  <p><%= button_to "Delete #{musician.name}", "/musicians/#{musician.id}", method: :delete %></p>
 <% end %>
 
 <p><%= link_to "Create Musician", "/orchestras/#{@orchestra.id}/musicians/new" %></p>
 
 <p><%= link_to "Sort A-Z", :sort => "name" %></p>
+
+<%= form_with url: "/orchestras/#{@orchestra.id}/musicians?sort=years_active", method: :get do |form| %>
+  <%= form.label :years_active, "Only return musicians with more than this many years of experience:" %>
+  <%= form.text_field :years_active %>
+  <%= form.submit "filter " %>
+<% end %>

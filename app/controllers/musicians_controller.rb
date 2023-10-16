@@ -13,12 +13,18 @@ class MusiciansController < ApplicationController
 
   def update
     musician = Musician.find(params[:id])
-    musician.update({
-      name: params[:name],
-      instrument: params[:instrument], 
-      position: params[:position], 
-      years_active: params[:years_active]
-    })
+    musician.update(musician_params)
     redirect_to "/musicians/#{musician.id}"
+  end
+
+  def destroy
+    musician = Musician.find(params[:id])
+    musician.destroy
+    redirect_to "/musicians"
+  end
+
+  private
+  def musician_params
+    params.permit(:name, :instrument, :position, :years_active, :on_leave)
   end
 end

@@ -63,6 +63,18 @@ RSpec.describe 'the musicians show page' do
     expect(current_path).to eq("/musicians/#{@kunjing.id}")
     expect(page).to have_content("bassoon")
     expect(page).to_not have_content("viola")
+  end
 
+  # User Story 20, Child Delete
+  it 'can delete child' do
+    visit "/musicians/#{@kunjing.id}"
+
+    expect(page).to have_link("Delete Musician")
+
+    click_link("Delete Musician")
+
+    expect(current_path).to eq("/musicians")
+
+    expect(page).to_not have_content("Kunjing Dai")
   end
 end

@@ -21,6 +21,7 @@ RSpec.describe 'the orchestras index page' do
     visit "/orchestras"
 
     expect(@portland.name).to appear_before(@colorado.name)
+    expect(page).to have_content(@portland.created_at)
   end
 
   # User Story 8, Child Index Link
@@ -82,5 +83,18 @@ RSpec.describe 'the orchestras index page' do
     click_link("Update Colorado Symphony")
 
     expect(current_path).to eq("/orchestras/#{@colorado.id}/edit")
+  end
+
+  # User Story 22, Parent Delete From Parent Index Page
+  it 'can delete parent' do
+    visit '/orchestras'
+
+    expect(page).to have_content("Colorado Symphony")
+    expect(page).to have_button("Delete Colorado Symphony")
+
+    click_button("Delete Colorado Symphony")
+
+    expect(current_path).to eq("/orchestras")
+    expect(page).to_not have_content("Colorado Symphony")
   end
 end

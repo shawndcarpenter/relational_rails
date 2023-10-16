@@ -1,6 +1,3 @@
-<h4><a href="/orchestras/"><%= "All Orchestras" %></a></h4>
-<h4><a href="/musicians/"><%= "All Musicians" %></a></h4>
-
 <h1>All Musicians</h1>
 
 <% @musicians.each do |musician| %>
@@ -10,5 +7,7 @@
     <p>Chair: <%= musician.position %></p>
     <p>Years With Orchestra: <%= musician.years_active %></p>
     <p><a href="/musicians/<%= musician.id %>/edit"><%= "Update #{musician.name}" %></a></p>
+    <p>Currently On Leave</p>
+    <p><%= button_to "Delete #{musician.name}", "/musicians/#{musician.id}", method: :delete %></p>
   <% end %>
 <% end %>

@@ -1,10 +1,13 @@
-<h4><a href="/orchestras/"><%= "All Orchestras" %></a></h4>
-<h4><a href="/musicians/"><%= "All Musicians" %></a></h4>
-
 <h1><%= @orchestra.name %></h1>
 <p>City: <%= @orchestra.city %></p>
 <p>Conductors: <%= @orchestra.total_conductors %></p>
-<p>Musicians: <%= @orchestra.musicians.length %></p>
+<% if @orchestra.active %>
+  <p>Currently Active</p>
+<% else %>
+  <p>We are not currently performing. Check back next season!</p>
+<% end %>
+<p>Musicians: <%= @orchestra.musicians_count %></p>
 
 <h4><a href="/orchestras/<%= @orchestra.id %>/musicians"><%= "Our Musicians" %></a></h4>
-<h4><a href="/orchestras/<%= @orchestra.id %>/edit">Update Orchestras</a></h4>
+<h4><a href="/orchestras/<%= @orchestra.id %>/edit">Update Orchestra</a></h4>
+<h4><%= button_to "Delete Orchestra", "/orchestras/#{@orchestra.id}", method: :delete %></h4>

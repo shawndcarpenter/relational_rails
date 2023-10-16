@@ -87,4 +87,21 @@ RSpec.describe 'the orchestras show page' do
     expect(page).to have_content("City: Centennial")
     expect(page).to have_content("Conductors: 2")
   end
+
+  # User Story 19, Parent Delete 
+  it 'can delete parent and its child records' do
+    visit "/orchestras/#{@colorado.id}"
+
+    expect(page).to have_button("Delete Orchestra")
+
+    click_button("Delete Orchestra")
+
+    expect(current_path).to eq("/orchestras")
+
+    expect(page).to_not have_content("Colorado Symphony")
+
+    visit "/musicians"
+
+    expect(page).to_not have_content("Kunjing Dai")
+  end
 end
