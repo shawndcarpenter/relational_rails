@@ -7,94 +7,91 @@ RSpec.describe 'the orchestras index page' do
     @los_angeles = Orchestra.create!(name: 'Los Angeles Philharmonics', active: true, city: 'Los Angeles', total_conductors: 3)
   end
   
-  # User Story 1, Parent Index
-  it 'displays all of the names of the orchestras' do
-    visit "/orchestras"
+  describe "As a visitor" do
+    describe "When I visit the orchestras index page" do
+      # User Story 1, Parent Index
+      it 'displays all of the names of the orchestras' do
+        visit "/orchestras"
 
-    expect(page).to have_content(@colorado.name)
-    expect(page).to have_content(@portland.name)
-   # expect(page).to_not have_content(los_angeles.name)
-  end
+        expect(page).to have_content(@colorado.name)
+        expect(page).to have_content(@portland.name)
+      end
 
-  # User Story 6, Parent Index Sorted by Most Recently Created
-  it 'displays all of the names of the orchestras in order by most recently created' do
-    visit "/orchestras"
+      # User Story 6, Parent Index Sorted by Most Recently Created
+      it 'displays all of the names of the orchestras in order by most recently created' do
+        visit "/orchestras"
+  
+        expect(@portland.name).to appear_before(@colorado.name)
+      end
 
-    expect(@portland.name).to appear_before(@colorado.name)
-    expect(page).to have_content(@portland.created_at)
-  end
+      it 'displays when record was created next to record' do
+        visit "/orchestras"
 
-  # User Story 8, Child Index Link
-  it 'has a child index link' do
-    visit "/orchestras"
+        expect(page).to have_content(@portland.created_at)
+      end
+    end
+  
+    describe "When I visit any page on the site" do
+      # User Story 8, Child Index Link
+      it 'has a child index link at top of page' do
+        visit "/orchestras"
 
-    expect(page).to have_link("All Musicians")
+        expect(page).to have_link("All Musicians")
+        expect("All Musicians").to appear_before(@colorado.name)
 
-    click_link "All Musicians"
+        click_link "All Musicians"
 
-    expect(current_path).to eq('/musicians/')
-  end
+        expect(current_path).to eq('/musicians/')
+      end
 
-  # User Story 9, Parent Index Link
-  it 'has a parent index link' do
-    visit "/orchestras"
+      # User Story 9, Parent Index Link
+      it 'has a parent index link at top of page' do
+        visit "/orchestras"
 
-    expect(page).to have_link("All Orchestras")
+        expect(page).to have_link("All Orchestras")
+        expect("All Orchestras").to appear_before(@colorado.name)
 
-    click_link "All Orchestras"
+        click_link "All Orchestras"
 
-    expect(current_path).to eq('/orchestras/')
-  end
+        expect(current_path).to eq('/orchestras/')
+      end
+    end
 
-  # User Story 11, Parent Creation
-  it 'allows creation of new parent' do
-    visit "/orchestras"
+    describe "When I visit the orchestras index page" do
+      # User Story 11, Parent Creation
+      it 'has a link to create a new orchestra' do
+        visit "/orchestras"
 
-    expect(page).to have_link("New Orchestra")
+        expect(page).to have_link("New Orchestra")
 
-    click_link "New Orchestra"
+        click_link "New Orchestra"
 
-    expect(current_path).to eq('/orchestras/new/')
+        expect(current_path).to eq('/orchestras/new/')
+      end
 
-    fill_in "name", with: "Chicago Symphony Orchestra"
-    fill_in "city", with: "Chicago"
-    fill_in "total_conductors", with: "3"
+      # User Story 17, Parent Update From Parent Index Page 
+      it 'can update parent info from index page' do
+        visit "/orchestras"
+  
+        expect(page).to have_link("Update Colorado Symphony")
+  
+        click_link("Update Colorado Symphony")
+  
+        expect(current_path).to eq("/orchestras/#{@colorado.id}/edit")
+      end
 
-    expect(page).to have_button
-
-    click_button
-
-    expect(current_path).to eq('/orchestras')
-    expect(page).to have_link("Chicago Symphony Orchestra")
-
-    click_link "Chicago Symphony Orchestra"
-
-    expect(page).to have_content("City: Chicago")
-    expect(page).to have_content("Conductors: 3")
-    expect(page).to have_content("Musicians: 0")
-  end
-
-  # User Story 17, Parent Update From Parent Index Page 
-  it 'can update parent info from index page' do
-    visit "/orchestras"
-
-    expect(page).to have_link("Update Colorado Symphony")
-
-    click_link("Update Colorado Symphony")
-
-    expect(current_path).to eq("/orchestras/#{@colorado.id}/edit")
-  end
-
-  # User Story 22, Parent Delete From Parent Index Page
-  it 'can delete parent' do
-    visit '/orchestras'
-
-    expect(page).to have_content("Colorado Symphony")
-    expect(page).to have_button("Delete Colorado Symphony")
-
-    click_button("Delete Colorado Symphony")
-
-    expect(current_path).to eq("/orchestras")
-    expect(page).to_not have_content("Colorado Symphony")
+      # User Story 22, Parent Delete From Parent Index Page
+      it 'next to every orchestra, I see a link to delete that orchestra' do
+        visit '/orchestras'
+  
+        expect(page).to have_content("Colorado Symphony")
+        expect(page).to have_button("Delete Colorado Symphony")
+  
+        click_button("Delete Colorado Symphony")
+  
+        expect(current_path).to eq("/orchestras")
+        expect(page).to_not have_content("Colorado Symphony")
+      end
+    end
   end
 end
