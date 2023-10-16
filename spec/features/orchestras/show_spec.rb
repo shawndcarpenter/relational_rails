@@ -92,9 +92,9 @@ RSpec.describe 'the orchestras show page' do
   it 'can delete parent and its child records' do
     visit "/orchestras/#{@colorado.id}"
 
-    expect(page).to have_link("Delete Orchestra")
+    expect(page).to have_button("Delete Orchestra")
 
-    click_link("Delete Orchestra")
+    click_button("Delete Orchestra")
 
     expect(current_path).to eq("/orchestras")
 
