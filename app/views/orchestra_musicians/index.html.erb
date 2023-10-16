@@ -7,6 +7,7 @@
   <p>Chair: <%= musician.position %></p>
   <p>Years With Orchestra: <%= musician.years_active %></p>
   <p><a href="/musicians/<%= musician.id %>/edit"><%= "Update #{musician.name}" %></a></p>
+  <p><%= button_to "Delete #{musician.name}", "/musicians/#{musician.id}", method: :delete %></p>
 <% end %>
 
 <p><%= link_to "Create Musician", "/orchestras/#{@orchestra.id}/musicians/new" %></p>
