@@ -36,4 +36,10 @@ class OrchestrasController < ApplicationController
     orchestra.save
     redirect_to "/orchestras/#{orchestra.id}"
   end
+
+  def destroy
+    orchestra = Orchestra.find(params[:id])
+    orchestra.destroy
+    redirect_to "/orchestras"
+  end
 end
