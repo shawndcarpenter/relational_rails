@@ -21,6 +21,7 @@ RSpec.describe 'the orchestras index page' do
     visit "/orchestras"
 
     expect(@portland.name).to appear_before(@colorado.name)
+    expect(page).to have_content(@portland.created_at)
   end
 
   # User Story 8, Child Index Link
