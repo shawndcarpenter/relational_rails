@@ -85,4 +85,15 @@ RSpec.describe 'the orchestras index page' do
   end
 
   # User Story 22, Parent Delete From Parent Index Page
+  it 'can delete parent' do
+    visit '/orchestras'
+
+    expect(page).to have_content("Colorado Symphony")
+    expect(page).to have_button("Delete Colorado Symphony")
+
+    click_button("Delete Colorado Symphony")
+
+    expect(current_path).to eq("/orchestras")
+    expect(page).to_not have_content("Colorado Symphony")
+  end
 end
