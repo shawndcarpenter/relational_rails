@@ -72,4 +72,6 @@ RSpec.describe 'Orchestras musicians index' do
 
     expect(current_path).to eq("/musicians/#{@kunjing.id}/edit")
   end
+
+  # User Story 23, Child Delete From Childs Index Page
 end

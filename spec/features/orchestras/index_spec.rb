@@ -83,4 +83,6 @@ RSpec.describe 'the orchestras index page' do
 
     expect(current_path).to eq("/orchestras/#{@colorado.id}/edit")
   end
+
+  # User Story 22, Parent Delete From Parent Index Page
 end
