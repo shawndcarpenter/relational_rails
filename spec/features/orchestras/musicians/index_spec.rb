@@ -102,16 +102,22 @@ RSpec.describe 'Orchestras musicians index' do
   end
 
   # User Story 21, Display Records Over a Given Threshold 
-  xit 'can display only some children' do
+  it 'can display only some children' do
     visit "/orchestras/#{@colorado.id}/musicians"
+    expect(page).to have_content("Kunjing Dai")
 
     fill_in "years_active", with: "4"
 
-    expect(page).to have_button("Only return musicians with more than x years of experience")
+    expect(page).to have_content("Only return musicians with more than this many years of experience")
 
-    click_button("Only return musicians with more than x years of experience")
+    fill_in "years_active", with: "4"
+
+    expect(page).to have_button("filter")
+
+    click_button("filter")
 
     expect(current_path).to eq("/orchestras/#{@colorado.id}/musicians")
+    expect(page).to_not have_content("Kunjing Dai")
   end
 
     # User Story 23, Child Delete From Childs Index Page
