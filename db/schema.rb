@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_12_022805) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_17_033010) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_12_022805) do
     t.boolean "on_leave"
     t.string "instrument"
     t.integer "position"
-    t.string "years_active"
+    t.integer "years_active"
     t.string "integer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
