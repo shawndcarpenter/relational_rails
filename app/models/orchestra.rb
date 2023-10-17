@@ -4,4 +4,8 @@ class Orchestra < ApplicationRecord
   def musicians_count
     self.musicians.length
   end
+
+  def musicians_alphabetically
+    musicians.order(:name)
+  end
 end

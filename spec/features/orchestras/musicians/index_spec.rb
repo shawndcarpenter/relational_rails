@@ -6,7 +6,7 @@ RSpec.describe 'Orchestras musicians index' do
     @portland = Orchestra.create!(name: 'Portland Symphony', active: false, city: 'Portland', total_conductors: 1)
     @los_angeles = Orchestra.create!(name: 'Los Angeles Philharmonics', active: true, city: 'Los Angeles', total_conductors: 3)
     @kunjing = @colorado.musicians.create!(name: 'Kunjing Dai', on_leave: true, instrument: 'viola', position: 1, years_active: 1)
-    @dmitri = @colorado.musicians.create!(name: 'Dmitri Pogorelov', on_leave: false, instrument: 'violin', position: 4, years_active: 7)
+    @dmitri = @colorado.musicians.create!(name: 'Dmitri Pogorelov', on_leave: true, instrument: 'violin', position: 4, years_active: 7)
     @paul = @colorado.musicians.create!(name: 'Paul Primus', on_leave: false, instrument: 'violin', position: 2, years_active: 17)
     @delcho = @portland.musicians.create!(name: 'Delcho Tenev', on_leave: false, instrument: 'violin', position: 3, years_active: 8)
     @annamaria = @los_angeles.musicians.create!(name: 'Annamaria Vasmatzidis', on_leave: false, instrument: 'bass', position: 2, years_active: 1)
@@ -94,7 +94,7 @@ RSpec.describe 'Orchestras musicians index' do
         expect("Kunjing").to appear_before("Dmitri")
     
         expect(page).to have_link("Sort A-Z")
-    
+
         click_link("Sort A-Z")
     
         expect(current_path).to eq("/orchestras/#{@colorado.id}/musicians")
