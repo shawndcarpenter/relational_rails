@@ -12,6 +12,8 @@ RSpec.describe Orchestra, type: :model do
       delcho = colorado.musicians.create!(name: 'Delcho Tenev', on_leave: false, instrument: 'violin', position: 3, years_active: 8)
 
       expect(colorado.musicians_count).to eq(4)
+      expect(colorado.musicians_count).to_not eq(3)
+
     end
   end
   describe "#musicians_alphabetically" do
@@ -23,6 +25,19 @@ RSpec.describe Orchestra, type: :model do
       delcho = colorado.musicians.create!(name: 'Delcho Tenev', on_leave: false, instrument: 'violin', position: 3, years_active: 8)
 
       expect(colorado.musicians_alphabetically).to eq([delcho, dmitri, kunjing, paul])
+      expect(colorado.musicians_alphabetically).to_not eq([paul])
     end
   end
+
+  describe "#search" do
+  it 'can find orchestra based on name' do
+    colorado = Orchestra.create!(name: 'Colorado Symphony', active: true, city: 'Denver', total_conductors: 5)
+    portland = Orchestra.create!(name: 'Portland Symphony', active: false, city: 'Portland', total_conductors: 1)
+    los_angeles = Orchestra.create!(name: 'Los Angeles Philharmonics', active: true, city: 'Los Angeles', total_conductors: 3)
+
+    expect(Orchestra.search("Colorado Symphony")).to eq([colorado])
+    expect(Orchestra.search("Colorado")).to eq([colorado, portland, los_angeles])
+    expect(Orchestra.search("Colorado Symphony")).to_not eq([portland])
+  end
+end
 end

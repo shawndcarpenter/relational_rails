@@ -7,74 +7,78 @@ RSpec.describe 'the musicians show page' do
     @dmitri = @colorado.musicians.create!(name: 'Dmitri Pogorelov', on_leave: false, instrument: 'violin', position: 4, years_active: 7)
   end
 
-  # User Story 4, Child Show
-  it 'displays the name of the musician' do   
-    visit "/musicians/#{@kunjing.id}"
+  describe "As a visitor" do
+    describe "When I visit a musicians show page" do
+      # User Story 4, Child Show
+      it 'displays the name of the musician' do   
+        visit "/musicians/#{@kunjing.id}"
 
-    expect(page).to have_content(@kunjing.name)
-    expect(page).to_not have_content(@dmitri.name)
-  end
+        expect(page).to have_content(@kunjing.name)
+        expect(page).to_not have_content(@dmitri.name)
+      end
 
-  it 'displays the attributes of musician' do   
-    visit "/musicians/#{@kunjing.id}"
+      it 'displays the attributes of musician' do   
+        visit "/musicians/#{@kunjing.id}"
 
-    expect(page).to have_content(@kunjing.instrument)
-    expect(page).to have_content(@kunjing.position)
-    expect(page).to have_content(@kunjing.years_active)
-    expect(page).to_not have_content(@dmitri.position)
-  end
+        expect(page).to have_content(@kunjing.instrument)
+        expect(page).to have_content(@kunjing.position)
+        expect(page).to have_content(@kunjing.years_active)
+        expect(page).to_not have_content(@dmitri.position)
+      end
 
-  # User Story 8, Child Index Link
-  it 'has a child index link' do
-    visit "/musicians/#{@kunjing.id}"
+      # User Story 8, Child Index Link
+      it 'has a musicians index link' do
+        visit "/musicians/#{@kunjing.id}"
 
-    expect(page).to have_link("All Musicians")
+        expect(page).to have_link("All Musicians")
 
-    click_link "All Musicians"
+        click_link "All Musicians"
 
-    expect(current_path).to eq('/musicians/')
-  end
+        expect(current_path).to eq('/musicians/')
+      end
 
-  # User Story 9, Parent Index Link
-  it 'has a parent index link' do
-    visit "/musicians/#{@kunjing.id}"
+      # User Story 9, Parent Index Link
+      it 'has an orchestras index link' do
+        visit "/musicians/#{@kunjing.id}"
 
-    expect(page).to have_link("All Orchestras")
+        expect(page).to have_link("All Orchestras")
 
-    click_link "All Orchestras"
+        click_link "All Orchestras"
 
-    expect(current_path).to eq('/orchestras/')
-  end
+        expect(current_path).to eq('/orchestras/')
+      end
 
-  # User Story 14, Child Update 
-  it 'can update child' do
-    visit "/musicians/#{@kunjing.id}"
-    
-    expect(page).to have_link("Update Musician")
+      # User Story 14, Child Update 
+      it 'can update musician' do
+        visit "/musicians/#{@kunjing.id}"
+        
+        expect(page).to have_link("Update Musician")
 
-    click_link "Update Musician"
+        click_link "Update Musician"
 
-    expect(current_path).to eq("/musicians/#{@kunjing.id}/edit")
-    expect(page).to have_button
+        expect(current_path).to eq("/musicians/#{@kunjing.id}/edit")
+        expect(page).to have_button
 
-    fill_in "instrument", with: "bassoon"
-    click_button
+        fill_in "instrument", with: "bassoon"
+        click_button
 
-    expect(current_path).to eq("/musicians/#{@kunjing.id}")
-    expect(page).to have_content("bassoon")
-    expect(page).to_not have_content("viola")
-  end
+        expect(current_path).to eq("/musicians/#{@kunjing.id}")
+        expect(page).to have_content("bassoon")
+        expect(page).to_not have_content("viola")
+      end
 
-  # User Story 20, Child Delete
-  it 'can delete child' do
-    visit "/musicians/#{@kunjing.id}"
+      # User Story 20, Child Delete
+      it 'can delete musician' do
+        visit "/musicians/#{@kunjing.id}"
 
-    expect(page).to have_link("Delete Musician")
+        expect(page).to have_link("Delete Musician")
 
-    click_link("Delete Musician")
+        click_link("Delete Musician")
 
-    expect(current_path).to eq("/musicians")
+        expect(current_path).to eq("/musicians")
 
-    expect(page).to_not have_content("Kunjing Dai")
+        expect(page).to_not have_content("Kunjing Dai")
+      end
+    end
   end
 end

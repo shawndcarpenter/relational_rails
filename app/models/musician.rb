@@ -10,13 +10,9 @@ class Musician < ApplicationRecord
   end
 
   def self.search(search)
-    if search
-      musician = Musician.find_by(name: search)
-      if musician
-        self.where(id: musician)
-      else
-        Musician.all
-      end
+    musician = Musician.find_by(name: search)
+    if musician
+      self.where(id: musician)
     else
       Musician.all
     end
