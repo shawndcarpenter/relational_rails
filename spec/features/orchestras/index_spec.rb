@@ -5,6 +5,9 @@ RSpec.describe 'the orchestras index page' do
     @colorado = Orchestra.create!(name: 'Colorado Symphony', active: true, city: 'Denver', total_conductors: 5)
     @portland = Orchestra.create!(name: 'Portland Symphony', active: false, city: 'Portland', total_conductors: 1)
     @los_angeles = Orchestra.create!(name: 'Los Angeles Philharmonics', active: true, city: 'Los Angeles', total_conductors: 3)
+    @kunjing = @colorado.musicians.create!(name: 'Kunjing Dai', on_leave: true, instrument: 'viola', position: 1, years_active: 1)
+    @dmitri = @colorado.musicians.create!(name: 'Dmitri Pogorelov', on_leave: false, instrument: 'violin', position: 4, years_active: 7)
+    @paul = @portland.musicians.create!(name: 'Paul Primus', on_leave: false, instrument: 'violin', position: 2, years_active: 17)
   end
   
   describe "As a visitor" do
@@ -91,6 +94,23 @@ RSpec.describe 'the orchestras index page' do
   
         expect(current_path).to eq("/orchestras")
         expect(page).to_not have_content("Colorado Symphony")
+      end
+
+      # Extension 2: Search by name (exact match)
+      it 'can search for a name of an orchestra' do
+        visit '/orchestras'
+    
+        expect(page).to have_content(@colorado.name)
+        expect(page).to have_content(@portland.name)
+        expect(page).to have_button("Search")
+    
+        fill_in "search", with: "Colorado Symphony"
+    
+        click_button("Search")
+    
+        expect(page).to have_content(@colorado.name)
+        expect(page).to_not have_content(@portland.name)
+        expect(current_path).to eq('/orchestras')
       end
     end
   end

@@ -1,6 +1,10 @@
 class OrchestrasController < ApplicationController
   def index
-    @orchestras = Orchestra.order(created_at: :desc)
+    if params[:search] != nil
+      @orchestras = Orchestra.search(params[:search])
+    else
+      @orchestras = Orchestra.order(created_at: :desc)
+    end
   end
 
   def show
@@ -24,17 +28,19 @@ class OrchestrasController < ApplicationController
     orchestra = Orchestra.find(params[:id])
     orchestra.update(orchestra_params)
     orchestra.save
+
     redirect_to "/orchestras/#{orchestra.id}"
   end
 
   def destroy
     orchestra = Orchestra.find(params[:id])
     orchestra.destroy
+
     redirect_to "/orchestras"
   end
 
   private
   def orchestra_params
-    params.permit(:name, :city, :total_conductors, :active)
+    params.permit(:name, :city, :total_conductors, :active, :search)
   end
 end

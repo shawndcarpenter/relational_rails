@@ -8,4 +8,17 @@ class Orchestra < ApplicationRecord
   def musicians_alphabetically
     musicians.order(:name)
   end
+
+  def self.search(search)
+    if search
+      orchestra = Orchestra.find_by(name: search)
+      if orchestra
+        self.where(id: orchestra)
+      else
+        Orchestra.all
+      end
+    else
+      Orchestra.all
+    end
+  end
 end

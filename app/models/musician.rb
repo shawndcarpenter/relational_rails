@@ -8,4 +8,17 @@ class Musician < ApplicationRecord
   def self.on_leave   
     where(on_leave: :true)
   end
+
+  def self.search(search)
+    if search
+      musician = Musician.find_by(name: search)
+      if musician
+        self.where(id: musician)
+      else
+        Musician.all
+      end
+    else
+      Musician.all
+    end
+  end
 end

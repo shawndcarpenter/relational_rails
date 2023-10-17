@@ -9,3 +9,8 @@
     <p>Currently On Leave</p>
     <p><%= button_to "Delete #{musician.name}", "/musicians/#{musician.id}", method: :delete %></p> 
 <% end %>
+
+<%= form_tag("/musicians", method: :get) do %>
+  <%= text_field_tag(:search, params[:search]) %>
+  <%= submit_tag ("Search") %>
+<% end %>

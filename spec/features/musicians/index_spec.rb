@@ -6,6 +6,7 @@ RSpec.describe 'Orchestras musicians index' do
     @kunjing = @colorado.musicians.create!(name: 'Kunjing Dai', on_leave: true, instrument: 'viola', position: 1, years_active: 1)
     @dmitri = @colorado.musicians.create!(name: 'Dmitri Pogorelov', on_leave: false, instrument: 'violin', position: 4, years_active: 7)
     @paul = @colorado.musicians.create!(name: 'Paul Primus', on_leave: false, instrument: 'violin', position: 2, years_active: 17)
+    @christopher = @colorado.musicians.create!(name: 'Christopher Hanulik', on_leave: true, instrument: 'bass', position: 1, years_active: 1)
   end
 
   # User Story 3, Child Index
@@ -70,4 +71,36 @@ RSpec.describe 'Orchestras musicians index' do
 
     expect(current_path).to eq("/musicians/#{@kunjing.id}/edit")
   end
+
+  # User Story 23, Child Delete From Childs Index Page
+  it 'can delete child' do
+    visit '/musicians'
+
+    expect(page).to have_content("Kunjing Dai")
+    expect(page).to have_button("Delete Kunjing Dai")
+
+    click_button("Delete Kunjing Dai")
+
+    expect(current_path).to eq("/musicians")
+    expect(page).to_not have_content("Kunjing Dai")
+  end
+
+  # Extension 2: Search by name (exact match)
+  it 'can search for a name' do
+    visit '/musicians'
+
+    expect(page).to have_content(@kunjing.name)
+    expect(page).to have_content(@christopher.name)
+    expect(page).to have_button("Search")
+
+    fill_in "search", with: "Kunjing Dai"
+
+    click_button("Search")
+
+    expect(page).to have_content(@kunjing.name)
+    expect(page).to_not have_content(@christopher.name)
+    expect(current_path).to eq('/musicians')
+  end
+
+
 end
