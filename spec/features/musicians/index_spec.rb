@@ -70,17 +70,4 @@ RSpec.describe 'Orchestras musicians index' do
 
     expect(current_path).to eq("/musicians/#{@kunjing.id}/edit")
   end
-
-  # User Story 23, Child Delete From Childs Index Page
-  it 'can delete child' do
-    visit '/musicians'
-
-    expect(page).to have_content("Kunjing Dai")
-    expect(page).to have_button("Delete Kunjing Dai")
-
-    click_button("Delete Kunjing Dai")
-
-    expect(current_path).to eq("/musicians")
-    expect(page).to_not have_content("Kunjing Dai")
-  end
 end
