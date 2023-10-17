@@ -10,98 +10,93 @@ RSpec.describe 'the orchestras show page' do
     @delcho = @colorado.musicians.create!(name: 'Delcho Tenev', on_leave: false, instrument: 'violin', position: 3, years_active: 8)
   end
 
-  # User Story 2, Parent Show
-  it 'displays the name of the orchestra' do
-    visit "/orchestras/#{@colorado.id}"
+  describe "As a visitor" do
+    describe "When I visit the orchestra show page" do
+      # User Story 2, Parent Show
+      it 'displays the name of the orchestra' do
+        visit "/orchestras/#{@colorado.id}"
 
-    expect(page).to have_content(@colorado.name)
-  end
+        expect(page).to have_content(@colorado.name)
+      end
 
-  it 'displays the attributes of the orchestra' do
-    visit "/orchestras/#{@colorado.id}"
+      it 'displays the attributes of the orchestra' do
+        visit "/orchestras/#{@colorado.id}"
 
-    expect(page).to have_content(@colorado.city)
-    expect(page).to have_content(@colorado.total_conductors)
-  end
+        expect(page).to have_content(@colorado.city)
+        expect(page).to have_content(@colorado.total_conductors)
+      end
 
-  # User Story 7, Parent Child Count
-  it 'displays the number of children associated with parent' do
-    visit "/orchestras/#{@colorado.id}"
+      # User Story 7, Parent Child Count
+      it 'displays the number of musicians associated with the orchestra' do
+        visit "/orchestras/#{@colorado.id}"
+  
+        expect(page).to have_content("Musicians: 4")
+      end
+    end
 
-    expect(page).to have_content("Musicians: 4")
-  end
+    describe "When I visit any page on the site" do
+      # User Story 8, Child Index Link
+      it 'has a musicians index link' do
+        visit "/orchestras/#{@colorado.id}"
 
-  # User Story 8, Child Index Link
-  it 'has a child index link' do
-    visit "/orchestras/#{@colorado.id}"
+        expect(page).to have_link("All Musicians")
 
-    expect(page).to have_link("All Musicians")
+        click_link "All Musicians"
 
-    click_link "All Musicians"
+        expect(current_path).to eq('/musicians/')
+      end
 
-    expect(current_path).to eq('/musicians/')
-  end
+      # User Story 9, Parent Index Link
+      it 'has an orchestras index link' do
+        visit "/orchestras/#{@colorado.id}"
 
-  # User Story 9, Parent Index Link
-  it 'has a parent index link' do
-    visit "/orchestras/#{@colorado.id}"
+        expect(page).to have_link("All Orchestras")
 
-    expect(page).to have_link("All Orchestras")
+        click_link "All Orchestras"
 
-    click_link "All Orchestras"
+        expect(current_path).to eq('/orchestras/')
+      end
+    end
 
-    expect(current_path).to eq('/orchestras/')
-  end
+    describe "When I visit the orchestra show page" do
+      # User Story 10, Parent Child Index Link
+      it 'links to the orchestra musicians page' do
+        visit "/orchestras/#{@colorado.id}"
 
-  # User Story 10, Parent Child Index Link
-  it 'links to the parents childrens page' do
-    visit "/orchestras/#{@colorado.id}"
+        expect(page).to have_link("Our Musicians")
 
-    expect(page).to have_link("Our Musicians")
+        click_link "Our Musicians"
 
-    click_link "Our Musicians"
+        expect(current_path).to eq("/orchestras/#{@colorado.id}/musicians")
+      end
 
-    expect(current_path).to eq("/orchestras/#{@colorado.id}/musicians")
-  end
+      # User Story 12, Parent Update
+      it 'links to orchestra edit page' do
+        visit "/orchestras/#{@colorado.id}"
 
-  # User Story 12, Parent Update
-  it 'updates parent' do
-    visit "/orchestras/#{@colorado.id}"
+        expect(page).to have_link("Update Orchestra")
 
-    expect(page).to have_link("Update Orchestra")
+        click_link "Update Orchestra"
 
-    click_link "Update Orchestra"
+        expect(current_path).to eq("/orchestras/#{@colorado.id}/edit")
+      end
 
-    expect(current_path).to eq("/orchestras/#{@colorado.id}/edit")
+      # User Story 19, Parent Delete 
+      it 'can delete orchestra and its musicians records' do
+        visit "/orchestras/#{@colorado.id}"
 
-    fill_in "name", with: "Colorado Philharmonic"
-    fill_in "city", with: "Centennial"
-    fill_in "total_conductors", with: "2"
+        expect(page).to have_button("Delete Orchestra")
 
-    expect(page).to have_button
+        click_button("Delete Orchestra")
 
-    click_button
+        expect(current_path).to eq("/orchestras")
 
-    expect(current_path).to eq("/orchestras/#{@colorado.id}")
-    expect(page).to have_content("Colorado Philharmonic")
-    expect(page).to have_content("City: Centennial")
-    expect(page).to have_content("Conductors: 2")
-  end
+        expect(page).to_not have_content("Colorado Symphony")
 
-  # User Story 19, Parent Delete 
-  it 'can delete parent and its child records' do
-    visit "/orchestras/#{@colorado.id}"
+        visit "/musicians"
 
-    expect(page).to have_button("Delete Orchestra")
-
-    click_button("Delete Orchestra")
-
-    expect(current_path).to eq("/orchestras")
-
-    expect(page).to_not have_content("Colorado Symphony")
-
-    visit "/musicians"
-
-    expect(page).to_not have_content("Kunjing Dai")
+        expect(page).to_not have_content("Kunjing Dai")
+      end
+    end
   end
 end

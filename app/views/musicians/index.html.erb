@@ -1,13 +1,16 @@
 <h1>All Musicians</h1>
 
 <% @musicians.each do |musician| %>
-  <% if musician.on_leave == true %>
     <h3><a href="/musicians/<%= musician.id %>"><%= musician.name %></a></h3>
     <p>Instrument: <%= musician.instrument %></p>
     <p>Chair: <%= musician.position %></p>
     <p>Years With Orchestra: <%= musician.years_active %></p>
     <p><a href="/musicians/<%= musician.id %>/edit"><%= "Update #{musician.name}" %></a></p>
     <p>Currently On Leave</p>
-    <p><%= button_to "Delete #{musician.name}", "/musicians/#{musician.id}", method: :delete %></p>
-  <% end %>
+    <p><%= button_to "Delete #{musician.name}", "/musicians/#{musician.id}", method: :delete %></p> 
+<% end %>
+
+<%= form_tag("/musicians", method: :get) do %>
+  <%= text_field_tag(:search, params[:search]) %>
+  <%= submit_tag ("Search") %>
 <% end %>

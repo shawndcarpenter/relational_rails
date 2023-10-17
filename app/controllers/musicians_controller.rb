@@ -1,6 +1,10 @@
 class MusiciansController < ApplicationController
   def index
-    @musicians = Musician.all
+    if params[:search] != nil
+      @musicians = Musician.search(params[:search])
+    else
+      @musicians = Musician.on_leave
+    end
   end
 
   def show

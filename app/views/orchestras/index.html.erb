@@ -10,3 +10,8 @@
 <% end %>
 
 <h4><a href="/orchestras/new/"><%= "New Orchestra" %></a></h4>
+
+<%= form_tag("/orchestras", method: :get) do %>
+  <%= text_field_tag(:search, params[:search]) %>
+  <%= submit_tag ("Search") %>
+<% end %>

@@ -3,8 +3,10 @@ class OrchestraMusiciansController < ApplicationController
     @orchestra = Orchestra.find(params[:id])
     if params[:years_active] != nil
       @musicians = @orchestra.musicians.more_than(params[:years_active])
-    else
-      @musicians = @orchestra.musicians.order(params[:sort])
+    elsif params[:sort] == 'name'
+      @musicians = @orchestra.musicians_alphabetically
+    else 
+      @musicians = @orchestra.musicians
     end
   end
 
